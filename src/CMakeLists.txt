@@ -70,13 +70,15 @@ target_link_libraries(computeALEcomplexity exODT
   ${BPP_LIBRARIES}
 )
 
-# needs OMP
-# add_executable(mlsampler exODT_sim.h mlsampler.cpp)
-# target_link_libraries(mlsampler exODT
-#   ${Boost_MPI_LIBRARY}
-#   ${MPI_LIBRARIES}
-#   ${BPP_LIBRARIES}
-# )
+if (OPENMP_FOUND)
+  # needs OMP
+  add_executable(mlsampler exODT_sim.h mlsampler.cpp)
+  target_link_libraries(mlsampler exODT
+    ${Boost_MPI_LIBRARY}
+    ${MPI_LIBRARIES}
+    ${BPP_LIBRARIES}
+  )
+endif(OPENMP_FOUND)
 
 add_executable(wALE_ml_sample wALE_ml_sample.cpp)
 target_link_libraries(wALE_ml_sample exODT
